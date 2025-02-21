@@ -51,29 +51,34 @@ const AllContacts = () => {
     );
 
     return (
-        <div>
-            <div id="contacts">
-                {!showForm && <button onClick={() => setShowForm(true)}>Add Contact</button>}
+        <div className="p-6">
+            <div id="contacts" className="flex justify-between items-center bg-gray-200 p-4 rounded-lg">
+                {!showForm && <button onClick={() => setShowForm(true)} className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Add Contact</button>}
                 {showForm && (
-                    <div id="contactForm">
+                    <div id="contactForm" className="flex flex-col gap-4">
                         <input
                             type="text"
                             placeholder="Name"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
+                            className="p-2 border border-gray-300 rounded"
                         />
                         <input
                             type="text"
                             placeholder="Phone Number"
                             value={phone}
-                            maxLength={10}  // Restrict max input length to 10 characters
-                            onChange={(e) => setPhone(e.target.value.replace(/\D/, ''))}  // Ensures only numbers are entered
+                            maxLength={10}
+                            onChange={(e) => setPhone(e.target.value.replace(/\D/, ''))}
+                            className="p-2 border border-gray-300 rounded"
                         />
-
-                        <button onClick={editingId ? saveContact : addContact}>
-                            {editingId ? 'Save Contact' : 'Save New Contact'}
-                        </button>
-                        <button onClick={() => setShowForm(false)}>Cancel</button>
+                        <div className="flex gap-2">
+                            <button onClick={editingId ? saveContact : addContact} className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">
+                                {editingId ? 'Save Contact' : 'Save New Contact'}
+                            </button>
+                            <button onClick={() => setShowForm(false)} className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600">
+                                Cancel
+                            </button>
+                        </div>
                     </div>
                 )}
                 <input
@@ -81,99 +86,27 @@ const AllContacts = () => {
                     value={searchQuery}
                     onChange={handleSearch}
                     placeholder="Search contacts"
+                    className="p-2 border border-gray-300 rounded"
                 />
             </div>
 
-            <div id="contactList">
+            <div id="contactList" className="mt-6">
                 {filteredContacts.length > 0 ? (
                     <ul>
                         {filteredContacts.map((contact) => (
-                            <li key={contact.id}>
-                                {contact.name} - {contact.phone}
-                                <button onClick={() => editContact(contact.id)}>Edit</button>
-                                <button onClick={() => deleteContact(contact.id)}>Delete</button>
+                            <li key={contact.id} className="flex justify-between items-center bg-gray-100 p-4 mb-4 rounded-lg shadow-sm">
+                                <span>{contact.name} - {contact.phone}</span>
+                                <div>
+                                    <button onClick={() => editContact(contact.id)} className="bg-yellow-500 text-white py-1 px-3 rounded hover:bg-yellow-600 mr-2">Edit</button>
+                                    <button onClick={() => deleteContact(contact.id)} className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600">Delete</button>
+                                </div>
                             </li>
                         ))}
                     </ul>
                 ) : (
-                    <p>No contacts available.</p>
+                    <p className="text-center text-gray-600">No contacts available.</p>
                 )}
             </div>
-
-            <style jsx>{`
-        #contacts {
-          display: flex;
-          justify-content: space-around;
-          align-items: center;
-          flex-direction: row;
-          border: 2px solid #333;
-          padding: 10px;
-          background-color: #f4f4f4;
-        }
-         
-
-        #contactForm {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-        }
-
-        #contactForm input {
-          padding: 8px;
-          font-size: 1rem;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-        }
-
-        #contactForm button {
-          padding: 10px;
-          font-size: 1rem;
-          background-color: #4caf50;
-          color: white;
-          border: none;
-          cursor: pointer;
-          border-radius: 5px;
-        }
-
-        #contactForm button:hover {
-          background-color: #45a049;
-        }
-
-        #contactList {
-          margin-top: 20px;
-        }
-
-        ul {
-          list-style-type: none;
-          padding: 0;
-        }
-
-        li {
-          padding: 10px;
-          background-color: #f9f9f9;
-          border: 1px solid #ddd;
-          margin-bottom: 10px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          border-radius: 5px;
-        }
-
-        button {
-          padding: 5px 10px;
-          background-color: #f44336;
-          color: white;
-          border: none;
-          cursor: pointer;
-          border-radius: 5px;
-        }
-          
-          
-
-        button:hover {
-          background-color: #e53935;
-        }
-      `}</style>
         </div>
     );
 };

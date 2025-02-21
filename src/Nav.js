@@ -15,8 +15,8 @@ const Nav = () => {
   };
 
   return (
-    <div>
-     <h1>My Contacts</h1>
+    <div class="bg-zinc-700">
+     <h1 class="text-blue-600">My Contacts</h1>
      {/* Internal CSS */}
      <style jsx>{`
         div {
