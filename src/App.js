@@ -1,14 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
-import Nav from './Nav';
-import AllContacts from './AllContacts';
+import Navbar from './Navbar';
+import UsersData from './UsersData';
+import Counter from './Counter';
 
 function App() {
   return (
-    <>
-    <Nav></Nav>
-    <AllContacts></AllContacts>
-    </>
+  <>
+  <Navbar></Navbar>
+  <UsersData></UsersData>
+  <Counter></Counter>
+  </>  
   );
 }
 
